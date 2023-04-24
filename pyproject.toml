@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "pet-analytics"
+version = "0.1.0"
+description = ""
+authors = ["Eloi BERNARD <eloi.bernard@coexya.eu>"]
+readme = "README.md"
+packages = [{include = "pet_analytics"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+fastapi = "^0.95.1"
+uvicorn = {extras = ["standard"], version = "^0.21.1"}
+
+
+[tool.poetry.group.dev.dependencies]
+black = "^23.3.0"
+ruff = "^0.0.262"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
