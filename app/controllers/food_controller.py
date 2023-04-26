@@ -1,5 +1,8 @@
 from fastapi import APIRouter
 
+from app.models.food.responses.get_food_response import GetFoodResponse
+from app.services.food_service import get_food_service
+
 
 def get_food_controller() -> APIRouter:
     """Provides routes for managing food
@@ -9,9 +12,14 @@ def get_food_controller() -> APIRouter:
     """
     controller = APIRouter()
 
-    @controller.get("/")
-    async def get():
-        return {"message": "hello world"}
+    @controller.get(
+        "/",
+        name="food:get food",
+        summary="GET food",
+        response_model=GetFoodResponse,
+    )
+    async def get_food():
+        return {"message": get_food_service().get_food()}
 
     return controller
 
