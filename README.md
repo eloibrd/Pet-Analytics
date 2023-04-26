@@ -12,11 +12,17 @@
 ```
 # Install deps
 poetry install
+
+# Create .env
+cp .env.example .env
 ```
 
 ## Run
 
 ```
-# Bash script
+# Start influx and grafana containers
+docker compose up
+
+# Bash script to run fastapi app localy
 ./run.sh
 ```
