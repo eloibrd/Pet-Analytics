@@ -1,0 +1,31 @@
+version: "3.8"
+services:
+  # Influx database
+  influxdb:
+    container_name: PA-influxdb
+    image: influxdb:2.7
+    ports:
+      - "8086:8086"
+    #  Persistent storage
+    volumes:
+      - influxdb-storage:/var/lib/influxdb
+    env_file:
+      - .env
+  #  Grafana for data visualization
+  grafana:
+    container_name: PA-grafana
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    # Persistent storage & importing Grafana config and provisioning
+    volumes:
+      - grafana-storage:/var/lib/grafana
+      - ./grafana-provisioning/:/etc/grafana/provisioning
+    depends_on:
+      - influxdb
+    env_file:
+      - .env
+
+volumes:
+  influxdb-storage:
+  grafana-storage:
