@@ -6,21 +6,25 @@ import uvicorn
 from app.core.config import config
 
 
+# Use click to read cmd line args
 @click.command()
+# Read env
 @click.option(
     "--env",
-    type=click.Choice(["local", "dev", "prod"], case_sensitive=False),
+    type=click.Choice(["local", "prod"], case_sensitive=False),
     default="local",
 )
-@click.option(
-    "--debug",
-    type=click.BOOL,
-    is_flag=True,
-    default=False,
-)
-def main(env: str, debug: bool):
+def main(env: str):
+    """Application entry point.
+
+    Runs a uvicorn web server starting the fastapi app.
+    """
+
+    # set ENV environment variable
     os.environ["ENV"] = env
-    os.environ["DEBUG"] = str(debug)
+    print(
+        f"STARTUP: Running app in {env} mode. Debug enabled : {str(config.DEBUG)}. \n"
+    )
     uvicorn.run(
         app="app.app:app",
         host=config.APP_HOST,

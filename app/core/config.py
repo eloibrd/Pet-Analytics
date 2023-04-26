@@ -6,7 +6,7 @@ from pydantic import BaseSettings
 class Config(BaseSettings):
     """Base application configuration to overwrite."""
 
-    ENV: str = "development"
+    ENV: str = "local"
     DEBUG: bool = True
     APP_HOST: str = "0.0.0.0"
     APP_PORT: int = 8000
