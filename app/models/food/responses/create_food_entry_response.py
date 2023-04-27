@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
 
-class GetFoodResponse(BaseModel):
+class CreateFoodEntryResponse(BaseModel):
     """Response model for GET /api/food route.
     Implements pydantic for data validation.
     """

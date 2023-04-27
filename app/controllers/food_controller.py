@@ -1,6 +1,8 @@
+import logging
+
 from fastapi import APIRouter
 
-from app.models.food.responses.get_food_response import GetFoodResponse
+import app.models.food as foodModels
 from app.services.food_service import get_food_service
 
 
@@ -12,14 +14,26 @@ def get_food_controller() -> APIRouter:
     """
     controller = APIRouter()
 
-    @controller.get(
+    @controller.post(
         "/",
-        name="food:get food",
-        summary="GET food",
-        response_model=GetFoodResponse,
+        name="food:create food entry",
+        summary="CREATE food entry",
+        response_model=foodModels.CreateFoodEntryResponse,
     )
-    async def get_food():
-        return {"message": get_food_service().get_food()}
+    async def create_food_entry():
+        """Route to insert a food entry in database.
+
+        Returns: \n
+            HTTP response: 201 Created if succeed. \n
+            HTTP response: 400 Bad Request if bad request payload. \n
+            HTTP response: 401 Unauthorized if not authenticated TODO. \n
+        """
+
+        # TODO: make it work
+        logging.info("Create a new food point in database")
+        return foodModels.CreateFoodEntryResponse(
+            message=get_food_service().create_food_entry()
+        )
 
     return controller
 

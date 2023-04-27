@@ -6,10 +6,10 @@ class FoodServiceImpl(FoodServiceInterface):
     Provides methods to interact with food.
     """
 
-    def get_food(self) -> str:
-        """Fetch food
+    def create_food_entry(self) -> str:
+        """Insert an entry for food in database.
 
-        Returns:
-            str: food representation
+        Returns:\n
+            str: created food representation
         """
         return "Food str"

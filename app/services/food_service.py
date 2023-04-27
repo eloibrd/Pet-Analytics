@@ -5,7 +5,7 @@ class FoodServiceInterface(ABC):
     """An Interface to define methods used in Food Service."""
 
     @abstractmethod
-    def get_food(self) -> str:
+    def create_food_entry(self) -> str:
         pass
 
 
