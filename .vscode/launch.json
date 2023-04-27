@@ -1,0 +1,12 @@
+{
+  "configurations": [
+    {
+      "name": "Python: App",
+      "type": "python",
+      "request": "launch",
+      "program": "main.py",
+      "console": "integratedTerminal",
+      "args": ["--env", "local"]
+    }
+  ]
+}
