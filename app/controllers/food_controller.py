@@ -2,7 +2,7 @@ import logging
 
 from fastapi import APIRouter
 
-import app.models.food as foodModels
+import app.schemas.food as foodModels
 from app.services.food_service import get_food_service
 
 

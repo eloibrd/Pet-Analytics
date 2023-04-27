@@ -10,6 +10,8 @@ class Config(BaseSettings):
     DEBUG: bool = True
     APP_HOST: str = "0.0.0.0"
     APP_PORT: int = 8000
+    INFLUX_HOST: str = "localhost"
+    INFLUX_PORT: int = 8086
 
 
 class LocalConfig(Config):
@@ -26,6 +28,8 @@ class ProductionConfig(Config):
     """
 
     DEBUG: bool = False
+    INFLUX_HOST: str = "your.influx"
+    INFLUX_PORT: int = 8080
 
 
 def get_config() -> Config:
