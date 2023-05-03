@@ -1,0 +1,43 @@
+= Installation Guide
+:author: Eloi Bernard
+:docdate: 2023-04-27
+:docname: architecture
+:toc:
+
+== Prerequisites
+- Docker
+- Docker compose
+- DEV: Python 3
+- DEV: Poetry (Python dependencies and venv manager)
+
+== Development 
+
+Create a .env file
+
+```
+cp .env.example .env
+```
+
+WARNING: Don't forget to input your own environment values
+
+To start the development environment, start influx db and grafana by running
+
+```
+docker compose up -d
+```
+
+To run the application open a new terminal and enter
+
+```
+./run.sh
+```
+
+TIP: If the script is not executable, enable it to be executed by the current user by entering `chmod 744 ./run.sh` in a terminal
+
+You should now be able to query on localhost:APP_PORT/api
+
+A Swagger UI is available by default at localhost:APP_PORT/docs
+
+== Release
+
+TODO

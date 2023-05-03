@@ -1,0 +1,48 @@
+= Architecture
+:author: Eloi Bernard
+:docdate: 2023-04-27
+:docname: architecture
+:toc:
+
+== Layers
+
+This application is based on the Repositories - Services - Controllers approach.
+
+image::https://camillovisini.com/assets/oordoDSskO-900.50d24787.webp[Repo-Srvc-Ctrl]
+
+== Folders
+
+```
+app : the FastApi application
+    |-- controllers : controllers layer
+        |-- base_controller.py : global controller, provide all endpoints routes to FastApi
+        |-- x_controller.py : provides routes for anything related to x
+    |-- core
+        |-- config.py : application configuration
+    |-- models
+        |-- http : anything related to http
+            |-- x : anything related to http for x
+                |-- requests : anything related to requests for x
+                |-- responses : anything related to responses for x
+                |-- exceptions : manage anything related to errors for x
+        |-- schemas : anything related to the database
+            |-- x : anything related to the object x
+                |-- x_schema.py : main x schema
+                |-- ... : x props schemas
+        |-- x.py : x business logic definition
+    |-- repository : repositories layer
+        |-- impl : repositories implementations
+            |-- x_repository_impl.py : implementation of repository x
+        |-- x_repository.py : abstract definition of repository x
+    |-- services : services layer
+        |-- impl : services implementations
+            |-- x_service_impl.py : implementation of service x
+        |-- x_service.py : abstract definition of service x
+    |-- utils : anything useful
+        |-- influx_client.py : provides a environment dependant configurated influx client for all repositories
+    |-- app.py : fastApi application
+ grafana-provisioning : files related to grafana initialisation
+    |-- dashboards : dashboards definitions
+    |-- datasources : data provisioning
+ main.py : application entrypoint, launch an uvicorn server
+```

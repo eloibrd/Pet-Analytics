@@ -1,0 +1,15 @@
+= PET ANALYTICS
+:author: Eloi Bernard
+:docdate: 2023-04-27
+:docname: architecture
+:toc:
+
+== Run
+
+```
+# Start influx and grafana containers
+docker compose up -d
+
+# Bash script to run fastapi app localy
+./run.sh
+```
