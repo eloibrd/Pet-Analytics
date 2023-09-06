@@ -8,7 +8,6 @@ from app.models.schemas.food.food_tags import FoodTags
 
 class FoodSchema(BaseModel):
     """The schema to insert food in the influx database.
-    TODO: JSONable interface
 
     Args:
         - measurement: str - const value "Food"

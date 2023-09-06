@@ -1,9 +1,9 @@
 import logging
 
-from fastapi import APIRouter
+from fastapi import APIRouter, Response, status
 
-import app.schemas.food as foodModels
-from app.services.food_service import get_food_service
+import app.models.http.food as foodHTTPModels
+from app.core.deps import get_food_service
 
 
 def get_food_controller() -> APIRouter:
@@ -16,24 +16,24 @@ def get_food_controller() -> APIRouter:
 
     @controller.post(
         "/",
-        name="food:create food entry",
         summary="CREATE food entry",
-        response_model=foodModels.CreateFoodEntryResponse,
+        status_code=status.HTTP_201_CREATED,
     )
-    async def create_food_entry():
+    async def create_food_entry(payload: foodHTTPModels.CreateFoodEntryPayload):
         """Route to insert a food entry in database.
 
         Returns: \n
             HTTP response: 201 Created if succeed. \n
-            HTTP response: 400 Bad Request if bad request payload. \n
-            HTTP response: 401 Unauthorized if not authenticated TODO. \n
+            HTTP response: 422 Unproccessable Entity if bad request payload. \n
+            HTTP response: 401 Unauthorized if not authenticated. @todo \n
+            HTTP response: 500 Server Error if failed to save entry in database. @todo
         """
 
-        # TODO: make it work
+        # Log service call
         logging.info("Create a new food point in database")
-        return foodModels.CreateFoodEntryResponse(
-            message=get_food_service().create_food_entry()
-        )
+        # Call to food service to handle the request
+        get_food_service().create_food_entry(payload=payload)
+        return Response(status_code=status.HTTP_201_CREATED)
 
     return controller
 
